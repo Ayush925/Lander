@@ -1,48 +1,79 @@
 clear()
+clearOutput()
 drawStage(ColorMaker.black)
+class rocket {
+    val a = -7
+    val finalvel = Vector2D(0, a)
+    var vel = Vector2D(0, 0)
+    val cb = canvasBounds
+    val x = cb.x + 467.5 - 25
+    val y = cb.y + 334.5 + 200
+    val lander = Picture.rectangle(50, 70)
+    val thruster = Picture.rectangle(20, 50)
+    val gravity = Vector2D(0, -0.3)
 
-val gravity = Vector2D(0, -0.3)
-var vel = Vector2D(0, 0)
-val cb = canvasBounds
-val x = cb.x + 427
-val y = cb.y + 334
-var lander = Picture.rectangle(80, 120)
-var thruster = Picture.rectangle(30, 40)
-
-lander.setFillColor(red)
-thruster.setFillColor(yellow)
-lander.draw()
-thruster.draw()
-lander.setPosition(x, y)
-thruster.setPosition(x + 25, y - 25)
-
-animate {
-    vel = gravity + vel
-    lander.translate(vel)
-    thruster.translate(vel)
-    thruster.invisible()
-    if (isKeyPressed(Kc.VK_UP)) {
-        vel = Vector2D(0, 1)
-        vel = vel * 4
-        thruster.visible()
+    def draw(){ 
+    lander.setFillColor(red)
+    thruster.setFillColor(yellow)
+    lander.draw()
+    thruster.draw()
+    lander.setPosition(x, y)
+    thruster.setPosition(x + 15, y - 35)
     }
-    if (lander.collidesWith(stageBot)) {
+
+    def step() {
+        vel = gravity + vel
+        lander.translate(vel)
+        thruster.translate(vel)
         thruster.invisible()
-        
-        stopAnimation()
-        activateEditor()
+        if (isKeyPressed(Kc.VK_UP)) {
+            vel = Vector2D(0, 1)
+            vel = vel * 4
+            thruster.visible()
+        }
+        if (lander.collidesWith(m.moon)) {
+            thruster.invisible()
+            if (l.vel.y<=a) {
+        print("You Lose!")
+         }
+            else{
+                print("You Win!")
+            }
+            stopAnimation()
+            activateEditor()
 
+        }
+        if (lander.collidesWith(stageTop)) {
+
+            vel = bouncePicVectorOffStage(lander, vel)
+            vel = vel * 5
+
+        }
     }
-    if (lander.collidesWith(stageTop)) {
+} //> defined class rocket
 
-        vel = bouncePicVectorOffStage(lander, vel)
-        vel = vel * 5
-   
-    
+class Moon{
+    val moon = Picture {
+        left(180, 250)
     }
-    
 
-}
+    moon.setFillColor(ColorMaker.dimGrey)
+    moon.setPenColor(ColorMaker.dimGrey)
+    moon.setPosition(l.cb.x + 350 * 2 + 25, l.cb.y)
+
+    def draw() {
+        moon.draw
+    }
+} //> defined class Moon
+
+
+
+val l = new rocket  //> l: rocket = rocket@f9852b
+val m = new Moon //> m: Moon = Moon@4718
+m.draw
+l.draw//> l: rocket = rocket@1b7921c
+animate {
+l.step
+} //> res109: java.util.concurrent.Future[edu.umd.cs.piccolo.activities.PActivity] = net.kogics.kojo.util.FutureResult@19e003b
+
 activateCanvas()
-
-
