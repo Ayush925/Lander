@@ -8,7 +8,7 @@ val x = cb.x + 427
 val y = cb.y + 334
 var lander = Picture.rectangle(80, 120)
 var thruster = Picture.rectangle(30, 40)
-val li = Vector2D(0, 3)
+
 lander.setFillColor(red)
 thruster.setFillColor(yellow)
 lander.draw()
