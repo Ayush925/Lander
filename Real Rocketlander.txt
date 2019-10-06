@@ -34,10 +34,10 @@ class rocket {
         if (lander.collidesWith(m.moon)) {
             thruster.invisible()
             if (l.vel.y<=a) {
-        print("You Lose!")
+        drawCenteredMessage("You Lose",red,50) ->trans(0, -40)
          }
             else{
-                print("You Win!")
+               drawCenteredMessage("You Win!",green,50 )->trans(0, -40)
             }
             stopAnimation()
             activateEditor()
@@ -50,7 +50,7 @@ class rocket {
 
         }
     }
-} //> defined class rocket
+}
 
 class Moon{
     val moon = Picture {
@@ -64,16 +64,16 @@ class Moon{
     def draw() {
         moon.draw
     }
-} //> defined class Moon
+}
 
 
 
-val l = new rocket  //> l: rocket = rocket@f9852b
-val m = new Moon //> m: Moon = Moon@4718
+val l = new rocket 
+val m = new Moon
 m.draw
-l.draw//> l: rocket = rocket@1b7921c
+l.draw
 animate {
 l.step
-} //> res109: java.util.concurrent.Future[edu.umd.cs.piccolo.activities.PActivity] = net.kogics.kojo.util.FutureResult@19e003b
+}
 
 activateCanvas()
