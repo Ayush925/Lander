@@ -35,9 +35,11 @@ class rocket {
             thruster.invisible()
             if (l.vel.y<=a) {
         drawCenteredMessage("You Lose",red,50) ->trans(0, -40)
+        setOutputBackground(red)
          }
             else{
                drawCenteredMessage("You Win!",green,50 )->trans(0, -40)
+                setOutputBackground(green)
             }
             stopAnimation()
             activateEditor()
@@ -47,6 +49,8 @@ class rocket {
 
             vel = bouncePicVectorOffStage(lander, vel)
             vel = vel * 5
+            lander.translate(vel)
+            thruster.translate(vel)
 
         }
     }
