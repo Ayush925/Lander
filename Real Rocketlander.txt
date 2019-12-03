@@ -8,13 +8,13 @@ class rocket {
     val cb = canvasBounds
     val x = cb.x + 467.5 - 25
     val y = cb.y + 334.5 + 200
-    val lander = Picture.rectangle(50, 70)
+    val lander = Picture.image("F:/Don't open/Ayush/aaa.png")
     val thruster = Picture.rectangle(20, 50)
-    val gravity = Vector2D(0, -0.3)
+    val gravity = Vector2D(0, -1)
 
     def draw(){ 
-    lander.setFillColor(red)
-    thruster.setFillColor(yellow)
+    
+    lander.scale(0.15, 0.15)
     lander.draw()
     thruster.draw()
     lander.setPosition(x, y)
@@ -27,8 +27,8 @@ class rocket {
         thruster.translate(vel)
         thruster.invisible()
         if (isKeyPressed(Kc.VK_UP)) {
-            vel = Vector2D(0, 1)
-            vel = vel * 4
+            vel = Vector2D(0, 3)
+            vel = vel * 5
             thruster.visible()
         }
         if (lander.collidesWith(m.moon)) {
